@@ -1,8 +1,7 @@
 from flask import Flask,render_template,request,Response
 from videostream import VideoCamera
+from face_enroll import register_cam
 app=Flask(__name__)
-
-
 
 @app.route('/')
 def index():
@@ -21,12 +20,10 @@ def video_feed():
     return Response(gen(VideoCamera()),mimetype='multipart/x-mixed-replace; boundary=frame')    
 
 
-#@app.route('/open_camera')  
-#def open_camera():
-
-
-#@app.route('/enroll') 
-#def enroll():
+@app.route('/register') 
+def enroll():
+    register_cam()
+    return render_template('face_register.html',)
 
 
 
