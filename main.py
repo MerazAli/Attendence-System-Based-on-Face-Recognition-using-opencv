@@ -8,10 +8,6 @@ app=Flask(__name__)
 def index():
     return render_template('index.html')
 
-
-
-    # code for  camera in flask
-
 @app.route('/gen')
 def gen(camera):
     while True:
@@ -19,8 +15,9 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
-@app.route('/video_feed')
+@app.route('/camera')
 def video_feed():
+    print(type(gen(VideoCamera())))
     return Response(gen(VideoCamera()),mimetype='multipart/x-mixed-replace; boundary=frame')    
 
 
