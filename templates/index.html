@@ -4,17 +4,14 @@
 
 {% block head %}
 <title>Facial Recognition Service</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='button.css') }}">
-{% endblock %}
+<link rel="stylesheet" href="/static/style.css">
 {% block body %}
 <!--<img src="/static/img.jpg" width="500" height="150">        !-->
 <h1 align='center'>     Face Recognition Attendence System      </h1>
 <br>
 <hr color='black'>
 <br>
-<center>login
-<button type="submit" class="btn btn-primary">Open camera</button></center>
+<center>login <a href="/camera">view camera</a></center>
 <br>
 <br>
 <center>Register face
@@ -37,7 +34,7 @@
 <button type="button" class="btn btn-primary" class="button1">Take Image</button>
 <button type="button" class="btn btn-primary" class="button2">Train Image</button>
 <button type="button" class="btn btn-primary"class="button3">Quit</button>
-<a href="/camera">view camera</a>
+
 {% endblock%}
 </center>
 
