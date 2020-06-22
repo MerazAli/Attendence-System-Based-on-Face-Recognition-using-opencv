@@ -1,7 +1,7 @@
 import cv2
 
 
-def register_cam( path='cascades/haarcascade_frontalface_default.xml',scale=1.3,neighbors=5,pad=20 ):
+def register_cam(folder,name, path='cascades/haarcascade_frontalface_default.xml',scale=1.3,neighbors=5,pad=20, ):
     cap=cv2.VideoCapture(0) 
     face_cascade = cv2.CascadeClassifier(path)
 
@@ -27,7 +27,7 @@ def register_cam( path='cascades/haarcascade_frontalface_default.xml',scale=1.3,
             # add a text message to tell press c to capture and register image --meraz 
             # save image in dataset
             
-            cv2.imwrite("dataset/meraz." + '.' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+            cv2.imwrite(folder+'/'+name + '_' + str(count) + ".jpg", gray[y:y+h,x:x+w])
 
 
             if cv2.waitKey(1) & 0xFF == ord('c'):
@@ -39,4 +39,5 @@ def register_cam( path='cascades/haarcascade_frontalface_default.xml',scale=1.3,
     cap.release()
     cv2.destroyAllWindows()    
 
-register_cam(pad=50)
+if __name__ == "__main__":
+    pass

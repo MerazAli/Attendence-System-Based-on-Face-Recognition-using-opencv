@@ -2,41 +2,22 @@
 {% extends 'base.html' %}
 
 
-{% block head %}
-<title>Facial Recognition Service</title>
-<link rel="stylesheet" href="/static/style.css">
-{% endblock %}
 {% block body %}
-<!--<img src="/static/img.jpg" width="500" height="150">        !-->
-<h1 align='center'>Face Recognition Attendence System      </h1>
-<br>
-<hr color='black'>
-<br>
-<center>login <a href="/camera">view camera</a></center>
-<br>
-<br>
-<center>Register face <a href="/register">launch camera as a dialog</a></center> 
-<br>
-<br>
-<center>
-<div>
-<label>Enter Roll No         </label>
-<input type="number" name="Enter Roll No" id=""><br>
-<br>
-<br>
-<label>Enter student Name</label>
-<input type="number" name="Roll No" id=""><br>
-<br>
-<br>
-<br>
-</div>
-{% block css %}
-<button type="button" class="btn btn-primary" class="button1">Take Image</button>
-<button type="button" class="btn btn-primary" class="button2">Train Image</button>
-<button type="button" class="btn btn-primary"class="button3">Quit</button>
-
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            APPLICATION KA NAAM
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-success" href="/register" >register</a>
+                        <a class="btn btn-success" href="/login" >login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock%}
-</center>
-
-
-{% endblock %}

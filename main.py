@@ -1,7 +1,9 @@
-from flask import Flask,render_template,request,Response
+from flask import Flask,render_template,request,Response,flash,session,redirect
 from videostream import VideoCamera
-from face_enroll import register_cam
+from face_enroll2 import register_cam
+from helper import create_user_folder
 app=Flask(__name__)
+app.secret_key= "go revise the concepts"
 
 @app.route('/')
 def index():
@@ -20,10 +22,39 @@ def video_feed():
     return Response(gen(VideoCamera()),mimetype='multipart/x-mixed-replace; boundary=frame')    
 
 
-@app.route('/register') 
+@app.route('/register', methods=["POST","GET"]) 
 def enroll():
-    register_cam()
+    if request.method=="POST":
+        fullname = request.form.get('fullname')
+        rollno = request.form.get('rollno')
+        if fullname and rollno:
+            if False: # check database
+                pass
+            else:
+                # add the data to databasse
+                folder = create_user_folder(fullname,rollno)
+                if folder:
+                    session['folder'] = folder
+                    session['name'] = fullname
+                    flash("data created for the user",'success')
+                    return redirect('/save_images')
+                else:
+                    flash('folder not created', 'danger')
+        else:
+            flash('fill the data', 'warning')
+    return render_template('signup.html')
+
+@app.route('/save_images')
+def save_images_for_new_user():
+    if 'folder' in session:
+        folder = session['folder']
+        name = session['name']
+        register_cam(folder, name)
+    else:
+        flash('register your id and name first', 'warning')
+        return redirect('/register')
     return render_template('face_register.html',)
+
 
 
 
