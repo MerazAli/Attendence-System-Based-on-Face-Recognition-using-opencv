@@ -1,7 +1,7 @@
 import cv2
 
 
-def register_cam(folder,name, path='cascades/haarcascade_frontalface_default.xml',scale=1.3,neighbors=5,pad=20, ):
+def register_cam(folder,name, path='cascades/haarcascade_frontalface_default.xml',scale=1.3,neighbors=5,pad=20,limit=30 ):
     cap=cv2.VideoCapture(0) 
     face_cascade = cv2.CascadeClassifier(path)
 
@@ -19,20 +19,20 @@ def register_cam(folder,name, path='cascades/haarcascade_frontalface_default.xml
             faces = face_cascade.detectMultiScale(gray, scale, neighbors)
             
             for (x,y,w,h) in faces:
-                count+=1
                 cv2.rectangle(frame,(x-pad,y-pad),(x+w+pad,y+h+pad),(255,0,0),2)
                 roi_gray = gray[y-pad:y+h+pad, x-pad:x+w+pad]
                 cv2.imshow("roi",roi_gray)
                 cv2.imshow("frame",frame)
             # add a text message to tell press c to capture and register image --meraz 
             # save image in dataset
-            
-            cv2.imwrite(folder+'/'+name + '_' + str(count) + ".jpg", gray[y:y+h,x:x+w])
-
-
+            try:
+                count+=1
+                cv2.imwrite(folder+'/'+name + '_' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+            except:
+                pass
+            if count == limit:
+                break
             if cv2.waitKey(1) & 0xFF == ord('c'):
-                
-                print("Capture Face logic")
                 break
         else:
             break                                                                                                              

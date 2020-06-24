@@ -56,7 +56,15 @@ def save_images_for_new_user():
     return render_template('face_register.html',)
 
 
+@app.route('/login_cam')
+def login_cam():
+    return render_template('result.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 
 
 if __name__=='__main__':
-    app.run(debug=True)
+    app.run(debug=True, threaded=True)

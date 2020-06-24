@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
 {% block body %}
-<form method="post">
-    <div class="form-group">
-      <label for="fullname">enter full name</label>
-      <input type="text"
-          class="form-control form-control-lg" name="fullname" id="fullname" aria-describedby="nameHelp" placeholder="">
-      <small id="nameHelp" class="form-text text-muted">enter your full name registered in college</small>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <form method="post">
+            <div class="form-group">
+              <label for="fullname">enter full name</label>
+              <input type="text"
+                  class="form-control form-control-lg" name="fullname" id="fullname" aria-describedby="nameHelp" placeholder="">
+              <small id="nameHelp" class="form-text text-muted">enter your full name registered in college</small>
+            </div>
+            <div class="form-group">
+              <label for="rollno">roll number / college id</label>
+              <input type="number"
+                  class="form-control form-control-lg" name="rollno" id="rollno" aria-describedby="rollHelp" placeholder="enter valid roll number">
+              <small id="rollHelp" class="form-text text-muted">enter your registered roll number</small>
+            </div> 
+            <button class="btn btn-success btn-lg btn-block">register</button> 
+        </form>
+        </div>
+      </div>
     </div>
-    <div class="form-group">
-      <label for="rollno">roll number / college id</label>
-      <input type="number"
-          class="form-control form-control-lg" name="rollno" id="rollno" aria-describedby="rollHelp" placeholder="enter valid roll number">
-      <small id="rollHelp" class="form-text text-muted">enter your registered roll number</small>
-    </div> 
-    <button class="btn btn-success btn-lg btn-block">register</button> 
-</form>
+  </div>
+</div>
 {% endblock %}
