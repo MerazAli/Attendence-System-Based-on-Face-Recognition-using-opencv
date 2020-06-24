@@ -27,7 +27,7 @@ def register_cam(folder,name, path='cascades/haarcascade_frontalface_default.xml
             # save image in dataset
             try:
                 count+=1
-                cv2.imwrite(folder+'/'+name + '_' + str(count) + ".jpg", gray[y:y+h,x:x+w])
+                cv2.imwrite(folder+'/'+name + '_' + str(count) + ".jpg", frame)
             except:
                 pass
             if count == limit:

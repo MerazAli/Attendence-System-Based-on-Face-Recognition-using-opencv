@@ -32,7 +32,7 @@ def prepare_training_data(data_folder_path='dataset'):
                 continue;
             image_path = subject_dir_path + "/" + image_name
             image = cv2.imread(image_path)
-            cv2.imshow("Training on image...", image)
+            # cv2.imshow("Training on image...", image)
             cv2.waitKey(100)
             face, rect = detect_face(image)
             if face is not None:
@@ -45,7 +45,7 @@ def prepare_training_data(data_folder_path='dataset'):
 
 def train_face_ai(faces,labels):
     #create our LBPH face recognizer 
-    face_recognizer = cv2.face.createLBPHFaceRecognizer()
+    face_recognizer = cv2.face.LBPHFaceRecognizer_create()
     face_recognizer.train(faces, np.array(labels))
     return face_recognizer
 
@@ -59,7 +59,8 @@ def draw_text(img, text, x, y):
 def predict(test_img,face_recognizer):
     img = test_img.copy()
     face, rect = detect_face(img)
-    label= face_recognizer.predict(face)
+    label= face_recognizer.predict(face)[0]
+    print(label)
     label_text = subjects[label]
     draw_rectangle(img, rect)
     draw_text(img, label_text, rect[0], rect[1]-5)
@@ -78,8 +79,8 @@ if __name__ == "__main__":
     print("Predicting images...")
 
     #load test images
-    test_img1 = cv2.imread("dataset\zaid_2831982\zaid kamil_1.jpg")
-    test_img2 = cv2.imread("dataset\zaid_2831982\meraz ali_1.jpg")
+    test_img1 = cv2.imread("dataset\\zaid_72382\\zaid_29.jpg")
+    test_img2 = cv2.imread("dataset\\s2\\1.jpg")
 
     #perform a prediction
     predicted_img1 = predict(test_img1,face_recognizer)
