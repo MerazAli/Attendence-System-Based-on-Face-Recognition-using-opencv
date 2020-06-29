@@ -37,8 +37,8 @@ def prepare_training_data(data_folder_path='dataset'):
             try:
                 face, rect = detect_face(image)
                 if face is not None:
-                faces.append(face)
-                labels.append(label)
+                    faces.append(face)
+                    labels.append(label)
             except Exception as e:
                 print(e)
     cv2.destroyAllWindows()
