@@ -28,8 +28,8 @@ def register_cam(folder,name, path='cascades/haarcascade_frontalface_default.xml
             try:
                 count+=1
                 cv2.imwrite(folder+'/'+name + '_' + str(count) + ".jpg", frame)
-            except:
-                pass
+            except Exception as e:
+                print('error', e)            
             if count == limit:
                 break
             if cv2.waitKey(1) & 0xFF == ord('c'):
