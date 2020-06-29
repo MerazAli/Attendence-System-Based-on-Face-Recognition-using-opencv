@@ -29,15 +29,18 @@ def prepare_training_data(data_folder_path='dataset'):
         subject_images_names = os.listdir(subject_dir_path)
         for image_name in subject_images_names:
             if image_name.startswith("."):
-                continue;
+                continue
             image_path = subject_dir_path + "/" + image_name
             image = cv2.imread(image_path)
             # cv2.imshow("Training on image...", image)
             cv2.waitKey(100)
-            face, rect = detect_face(image)
-            if face is not None:
+            try:
+                face, rect = detect_face(image)
+                if face is not None:
                 faces.append(face)
                 labels.append(label)
+            except Exception as e:
+                print(e)
     cv2.destroyAllWindows()
     cv2.waitKey(1)
     cv2.destroyAllWindows()
