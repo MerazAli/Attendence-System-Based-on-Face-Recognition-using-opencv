@@ -2,6 +2,18 @@ from flask import Flask,render_template,request,Response,flash,session,redirect
 from videostream import VideoCamera
 from face_enroll2 import register_cam
 from helper import create_user_folder
+
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine, Column,String,Integer,Float
+import pandas as pd
+# from database import Products
+
+# connect to database
+engine = create_engine('sqlite:///attendance_db.sqlite3')
+Session = sessionmaker(bind=engine)
+sess = Session()
+# data base code ends
+
 app=Flask(__name__)
 app.secret_key= "go revise the concepts"
 
