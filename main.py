@@ -6,7 +6,7 @@ from helper import create_user_folder
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, Column,String,Integer,Float
 import pandas as pd
-# from database import Products
+from database_orm import Attendance,User
 
 # connect to database
 engine = create_engine('sqlite:///attendance_db.sqlite3')
@@ -39,11 +39,14 @@ def enroll():
     if request.method=="POST":
         fullname = request.form.get('fullname')
         rollno = request.form.get('rollno')
-        if fullname and rollno:
-            if False: # check database
-                pass
-            else:
-                # add the data to databasse
+        college = request.form.get('college')
+        year = request.form.get('year')
+        course = request.form.get('course')
+        if fullname and rollno and year:
+                # add the data to database
+                user = User(fullname, college,rollno, year,course)
+                sess.add(user)
+                sess.commit()
                 folder = create_user_folder(fullname,rollno)
                 if folder:
                     session['folder'] = folder
