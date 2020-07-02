@@ -3,10 +3,14 @@ from videostream import VideoCamera
 from face_enroll2 import register_cam
 from helper import create_user_folder
 
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import create_engine, Column,String,Integer,Float
+import os
+import pickle
 import pandas as pd
+import face_ai as ai
+import login_cam as lc
+from sqlalchemy.orm import sessionmaker
 from database_orm import Attendance,User
+from sqlalchemy import create_engine, Column,String,Integer,Float
 
 # connect to database
 engine = create_engine('sqlite:///attendance_db.sqlite3')
@@ -44,7 +48,7 @@ def enroll():
         course = request.form.get('course')
         if fullname and rollno and year:
                 # add the data to database
-                user = User(fullname, college,rollno, year,course)
+                user = User(name=fullname,college=college,roll=rollno,year=year,course=course)
                 sess.add(user)
                 sess.commit()
                 folder = create_user_folder(fullname,rollno)
@@ -74,13 +78,33 @@ def save_images_for_new_user():
 
 @app.route('/login_cam')
 def login_cam():
-    return render_template('result.html')
+    status= lc.webcam(sess)
+    return render_template('result.html',status=status)
 
 @app.route('/login')
 def login():
     return render_template('login.html')
 
+@app.route('/train')
+def trainer():
+    subjects = ai.get_names()
+    print("Preparing data...")
+    faces, labels = ai.prepare_training_data()
+    print("Data prepared")
+    print("Total faces: ", len(faces))
+    print("Total labels: ", len(labels))
+    face_recognizer = ai.train_face_ai(faces, labels)
+    
+    if not os.path.exists('models'):
+        os.mkdir('models')
+    with open('models/ai_model.p','wb') as f:
+        pickle.dump(face_recognizer, f)
+    print("model saved")
 
 
+@app.route('/view')
+def attendance_view():
+    data = pd.read_sql('attendance',engine)
+    return render_template('attendance.html',data = data.to_html(classes=('table','table-hovered','table-sm','table-responsive'),max_rows=None,max_cols=None,table_id='attendance'))
 if __name__=='__main__':
     app.run(debug=True, threaded=True)

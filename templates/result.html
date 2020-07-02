@@ -2,7 +2,7 @@
 {% block body %}
 <div class="container">
     <div class="jumbotron {{output}}">
-        {% if output == 'danger' %}
+        {% if not status %}
         <h3 class="display-1">some error occurred</h3>
         {% else %}
         <h3 class="display-1">attendance saved</h3>

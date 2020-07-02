@@ -1,3 +1,5 @@
+#prediction
+
 import cv2
 import numpy as np
 import os
@@ -13,6 +15,7 @@ def detect_face(img,cascade = 'cascades/lbpcascade_frontalface.xml'):
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5);
     if (len(faces) == 0):
         return None, None
+    
     (x, y, w, h) = faces[0]
     return gray[y:y+w, x:x+h], faces[0]
 
@@ -81,17 +84,17 @@ if __name__ == "__main__":
     face_recognizer = train_face_ai(faces, labels)
     print("Predicting images...")
 
-    #load test images
-    test_img1 = cv2.imread("dataset\\zaid_72382\\zaid_29.jpg")
-    test_img2 = cv2.imread("dataset\\s2\\1.jpg")
+    # #load test images
+    # test_img1 = cv2.imread("dataset\\meraz_1700\\meraz_8.jpg")
+    # test_img2 = cv2.imread("dataset\\shahbaz_548\\shahbaz_20.jpg")
 
-    #perform a prediction
-    predicted_img1 = predict(test_img1,face_recognizer)
-    predicted_img2 = predict(test_img2,face_recognizer)
-    print("Prediction complete")
+    # #perform a prediction
+    # predicted_img1 = predict(test_img1,face_recognizer)
+    # predicted_img2 = predict(test_img2,face_recognizer)
+    # print("Prediction complete")
 
-    #display both images
-    cv2.imshow(subjects[1], predicted_img1)
-    cv2.imshow(subjects[2], predicted_img2)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # #display both images
+    # cv2.imshow(subjects[0], predicted_img1)
+    # cv2.imshow(subjects[1], predicted_img2)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()

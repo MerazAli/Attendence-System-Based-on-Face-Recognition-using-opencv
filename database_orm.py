@@ -13,7 +13,7 @@ class User(Base):
     id = Column(Integer,primary_key=True)
     name = Column(String)
     college = Column(String)
-    roll = Column(Integer)
+    roll = Column(Integer,unique=True)
     year = Column(Integer)
     course = Column(String)
 
@@ -22,9 +22,9 @@ class Attendance(Base):
     id=Column(Integer,primary_key=True)
     date =  Column(DateTime,default=datetime.date)
     time =  Column(DateTime,default=datetime.time)
-    userid = Column(Integer,ForeignKey('users.id'))
+    roll = Column(Integer,ForeignKey('users.roll'))
     
 
 if __name__ == "__main__":
-    engine = create_engine('sqlite:///db.sqlite3')
+    engine = create_engine('sqlite:///attendance_db.sqlite3')
     Base.metadata.create_all(engine)
