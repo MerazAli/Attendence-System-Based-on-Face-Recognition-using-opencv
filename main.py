@@ -48,6 +48,7 @@ def enroll():
                 if folder:
                     session['folder'] = folder
                     session['name'] = fullname
+                    # to do add to database
                     flash("data created for the user",'success')
                     return redirect('/save_images')
                 else:

@@ -18,6 +18,27 @@
                   class="form-control form-control-lg" name="rollno" id="rollno" aria-describedby="rollHelp" placeholder="enter valid roll number">
               <small id="rollHelp" class="form-text text-muted">enter your registered roll number</small>
             </div> 
+            
+            <div class="form-group">
+              <label for="college">college</label>
+              <input type="text"
+                  class="form-control form-control-lg" name="college" id="college" disabled value="intergral university" aria-describedby="collegeIdHelp" placeholder="enter valid roll number">
+            </div> 
+            <div class="form-group">
+              <label for="course">Course</label>
+              <select name="course" id="course" class="form-control-lg">
+                <option checked>btech</option>
+                <option>bca</option>
+                <option>mca</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="year">roll number / college id</label>
+              <input type="number"
+                  class="form-control form-control-lg" name="year" id="year" aria-describedby="yearHelp" min="1" max="4" placeholder="enter valid year">
+              <small id="yearHelp" class="form-text text-muted">which year are you in?</small>
+            </div>
+            
             <button class="btn btn-success btn-lg btn-block">register</button> 
         </form>
         </div>
