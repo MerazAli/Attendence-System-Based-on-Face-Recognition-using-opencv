@@ -97,9 +97,9 @@ def trainer():
     
     if not os.path.exists('models'):
         os.mkdir('models')
-    with open('models/ai_model.p','wb') as f:
-        pickle.dump(face_recognizer, f)
-    print("model saved")
+        face_recognizer.save('models/ai.xml')
+        print("model saved")
+        return redirect('/')
 
 
 @app.route('/view')
