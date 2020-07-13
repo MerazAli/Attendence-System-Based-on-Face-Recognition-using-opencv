@@ -1,9 +1,9 @@
-{% extends 'success.html' %}
+{% extends 'base.html' %}
 {% block body%}
 <div class="container">
     <div class="row">
         <div class="col-sm-12">
-            {{data}}
+            {{data|safe}}
         </div>
     </div>
 </div>

@@ -97,14 +97,14 @@ def trainer():
     
     if not os.path.exists('models'):
         os.mkdir('models')
-        face_recognizer.save('models/ai.xml')
-        print("model saved")
-        return redirect('/')
+    face_recognizer.save('models/ai.xml')
+    print("model saved")
+    return redirect('/')
 
 
 @app.route('/view')
 def attendance_view():
     data = pd.read_sql('attendance',engine)
-    return render_template('attendance.html',data = data.to_html(classes=('table','table-hovered','table-sm','table-responsive'),max_rows=None,max_cols=None,table_id='attendance'))
+    return render_template('attendance.html',data = data.to_html(classes=('table','table-hovered','table-sm','table-responsive'),max_rows=None,max_cols=None,table_id='attendance',index=False,))
 if __name__=='__main__':
     app.run(debug=True, threaded=True)

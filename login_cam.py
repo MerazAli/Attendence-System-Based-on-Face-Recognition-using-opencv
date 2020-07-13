@@ -5,8 +5,8 @@ import os
 import pickle
 from database_orm import Attendance
 def load_model():
-    model=cv2.face.createLBPHFaceRecognizer()
-    return model.load('ai.xml')
+    model=cv2.face.LBPHFaceRecognizer_create()
+    return model.read('ai.xml')
 
 def predict(test_img,face_recognizer):
     img = test_img.copy()

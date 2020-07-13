@@ -29,21 +29,22 @@ def prepare_training_data(data_folder_path='dataset'):
     labels = []
     for label,dir_name in enumerate(dirs):
         subject_dir_path = data_folder_path + "/" + dir_name
-        subject_images_names = os.listdir(subject_dir_path)
-        for image_name in subject_images_names:
-            if image_name.startswith("."):
-                continue
-            image_path = subject_dir_path + "/" + image_name
-            image = cv2.imread(image_path)
-            # cv2.imshow("Training on image...", image)
-            cv2.waitKey(100)
-            try:
-                face, rect = detect_face(image)
-                if face is not None:
-                    faces.append(face)
-                    labels.append(label)
-            except Exception as e:
-                print(e)
+        if os.path.isdir(subject_dir_path):
+            subject_images_names = os.listdir(subject_dir_path)
+            for image_name in subject_images_names:
+                if image_name.startswith("."):
+                    continue
+                image_path = subject_dir_path + "/" + image_name
+                image = cv2.imread(image_path)
+                # cv2.imshow("Training on image...", image)
+                cv2.waitKey(100)
+                try:
+                    face, rect = detect_face(image)
+                    if face is not None:
+                        faces.append(face)
+                        labels.append(label)
+                except Exception as e:
+                    print(e)
     cv2.destroyAllWindows()
     cv2.waitKey(1)
     cv2.destroyAllWindows()
