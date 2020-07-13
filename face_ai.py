@@ -84,4 +84,5 @@ if __name__ == "__main__":
     print("Total faces: ", len(faces))
     print("Total labels: ", len(labels))
     face_recognizer = train_face_ai(faces, labels)
+    face_recognizer.write('models/ai.xml')
    

@@ -20,9 +20,9 @@ class User(Base):
 class Attendance(Base):
     __tablename__="attendance"
     id=Column(Integer,primary_key=True)
-    date =  Column(DateTime,default=datetime.date)
-    time =  Column(DateTime,default=datetime.time)
-    roll = Column(Integer,ForeignKey('users.roll'))
+    date =  Column(DateTime,default=datetime.now)
+    time =  Column(DateTime,default=datetime.now)
+    roll =  Column(Integer,ForeignKey('users.roll'))
     
 
 if __name__ == "__main__":

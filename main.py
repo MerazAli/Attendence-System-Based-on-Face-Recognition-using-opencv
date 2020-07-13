@@ -97,7 +97,7 @@ def trainer():
     
     if not os.path.exists('models'):
         os.mkdir('models')
-    face_recognizer.save('models/ai.xml')
+    face_recognizer.write('models/ai.xml')
     print("model saved")
     return redirect('/')
 
