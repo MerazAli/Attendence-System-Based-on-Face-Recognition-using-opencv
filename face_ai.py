@@ -48,6 +48,7 @@ def prepare_training_data(data_folder_path='dataset'):
     cv2.destroyAllWindows()
     cv2.waitKey(1)
     cv2.destroyAllWindows()
+    print(labels)
     return faces, labels
 
 def train_face_ai(faces,labels):
@@ -83,19 +84,4 @@ if __name__ == "__main__":
     print("Total faces: ", len(faces))
     print("Total labels: ", len(labels))
     face_recognizer = train_face_ai(faces, labels)
-    print("Predicting images...")
-
-    # #load test images
-    # test_img1 = cv2.imread("dataset\\meraz_1700\\meraz_8.jpg")
-    # test_img2 = cv2.imread("dataset\\shahbaz_548\\shahbaz_20.jpg")
-
-    # #perform a prediction
-    # predicted_img1 = predict(test_img1,face_recognizer)
-    # predicted_img2 = predict(test_img2,face_recognizer)
-    # print("Prediction complete")
-
-    # #display both images
-    # cv2.imshow(subjects[0], predicted_img1)
-    # cv2.imshow(subjects[1], predicted_img2)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+   
