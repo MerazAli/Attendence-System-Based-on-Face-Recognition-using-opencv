@@ -1,4 +1,5 @@
 
+
 import cv2
 import numpy as np
 import os
@@ -27,7 +28,7 @@ def detect_face(img,cascade = 'cascades/lbpcascade_frontalface.xml'):
     
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier(cascade)
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5);
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5)
     if (len(faces) == 0):
         return None, None
     
@@ -38,24 +39,23 @@ def predict(test_img):
     img = test_img.copy()
     model = load_model()
     subjects = get_names()
-    # try:
+    
     face, rect = detect_face(img)
-    label= model.predict(face)[0]
-    label_text = subjects[label]
-    draw_rectangle(img, rect)
-    draw_text(img, label_text, rect[0], rect[1]-5)
-    return img, label, label_text
-    # except Exception as e:
-    #     print(e)
-    #     return img ,None,None
+    try:
+        label= model.predict(face)[0]
+        label_text = subjects[label]
+        draw_rectangle(img, rect)
+        draw_text(img, label_text, rect[0], rect[1]-5)
+        return img, label, label_text
+    
+    except Exception as e:
+        print(e) 
+    
+    
 
 def take_attendace(sess,label_text):
     print("taking attendace,closing camera")
-    # roll = int(label_text.split('_')[1])
-    # data = sess.query(Attendance).filter(roll=roll).filter(date=datetime.now)
-    # print(data)
-    # if not data:
-    attendance = Attendance(roll=roll)
+    attendance = Attendance(roll= roll)
     sess.add(attendance)
     sess.commit()
 
@@ -66,6 +66,7 @@ def webcam(sess,path='cascades/haarcascade_frontalface_default.xml',scale=1.3,ne
         w=int(cap.get(3))
         h=int(cap.get(4))
         xstart=int(w//2)
+
         yend=int(h//2)
         font=cv2.FONT_HERSHEY_SIMPLEX
         if status:
@@ -88,8 +89,8 @@ if __name__ == "__main__":
     print("Predicting images...")
     
     #load test images
-    test_img1 = cv2.imread("dataset\\luffy_123\\luffy_8.jpg")
-    test_img2 = cv2.imread("dataset\\\\meraz_21.jpg")
+    test_img1 = cv2.imread("dataset\\guddu_54\\guddu_12.jpg")
+    test_img2 = cv2.imread("dataset\\Meraz_185\\Meraz_5.jpg")
 
     #perform a prediction
     img1, label1, label_text1 = predict(test_img1)
@@ -101,3 +102,4 @@ if __name__ == "__main__":
     #display both images
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
