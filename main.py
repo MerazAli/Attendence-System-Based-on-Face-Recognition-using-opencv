@@ -103,6 +103,11 @@ def trainer():
     return redirect('/')
 
 
+#@app.route('/view')
+#def attendance_view():
+#    data = pd.read_sql('attendance',engine)
+#   return render_template('attendance.html',data = data.to_html(classes=('table','table-hovered','table-sm','table-responsive'),max_rows=None,max_cols=None,table_id='attendance',index=False,))
+
 @app.route('/view')
 def attendance_view():
     data = pd.read_sql('attendance',engine)
