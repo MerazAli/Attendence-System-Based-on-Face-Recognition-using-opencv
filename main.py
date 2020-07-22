@@ -8,13 +8,13 @@ import pickle
 import pandas as pd
 import face_ai as ai
 import login_cam as lc
-from datetime import date
+from datetime import date,datetime
 from sqlalchemy.orm import sessionmaker
 from database_orm import Attendance,User
-from sqlalchemy import create_engine, Column,String,Integer,Float
+from sqlalchemy import create_engine, Column,String,Integer,Float, func
 
 # connect to database
-engine = create_engine('sqlite:///attendance_db.sqlite3')
+engine = create_engine('sqlite:///attendance_db.sqlite3',connect_args={'check_same_thread': False})
 Session = sessionmaker(bind=engine)
 sess = Session()
 # data base code ends
@@ -110,9 +110,8 @@ def trainer():
 
 @app.route('/view')
 def attendance_view():
-    data = pd.read_sql('attendance',engine)
-    today =datetime.now()
-    today_result = ttendance.query.filter(date=today)
-    return render_template('attendance.html',data = data.to_html(classes=('table','table-hovered','table-sm','table-responsive'),max_rows=None,max_cols=None,table_id='attendance',index=False,),today_result=today_result)
+    now =datetime.now()
+    today_result = sess.query(Attendance,User).filter(Attendance.roll == User.roll).all()
+    return render_template('attendance.html',today_result=today_result)
 if __name__=='__main__':
     app.run(debug=True, threaded=True)

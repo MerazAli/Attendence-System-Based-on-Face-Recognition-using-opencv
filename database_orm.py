@@ -3,7 +3,7 @@
 
 import sqlalchemy
 from datetime import datetime
-from sqlalchemy import create_engine, Column, Integer, String, Float,DateTime,ForeignKey
+from sqlalchemy import create_engine, Column, Integer, String, Float,DateTime,ForeignKey, Date, Time, func
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -20,9 +20,10 @@ class User(Base):
 class Attendance(Base):
     __tablename__="attendance"
     id=Column(Integer,primary_key=True)
-    date =  Column(DateTime,default=datetime.now)
-    time =  Column(DateTime,default=datetime.now)
+    date =  Column(Date,default=func.date(func.now()))
+    time =  Column(Time,default=func.time(func.now()))
     roll =  Column(Integer,ForeignKey('users.roll'))
+    
     
 
 if __name__ == "__main__":

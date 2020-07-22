@@ -55,7 +55,8 @@ def predict(test_img):
 
 def take_attendace(sess,label_text):
     print("taking attendace,closing camera")
-    attendance = Attendance(roll= roll)
+    roll = int(label_text.split('_')[1])
+    attendance = Attendance(roll = roll)
     sess.add(attendance)
     sess.commit()
 
