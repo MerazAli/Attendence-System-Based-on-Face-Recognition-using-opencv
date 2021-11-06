@@ -15,3 +15,8 @@ This project will help to managed attendence with help of Face recognition. Auth
    HTML
    CSS
  
+
+![Screenshot (4)](https://user-images.githubusercontent.com/61820721/140601333-4a75bfae-7826-43bc-83c3-4cad0914a2f7.png)
+![Screenshot (6)](https://user-images.githubusercontent.com/61820721/140601335-eb66494d-cd4b-49ad-b41a-587e70976ccc.png)
+![Screenshot (7)](https://user-images.githubusercontent.com/61820721/140601336-c697d328-4c2b-4e7e-b011-926746cd9afb.png)
+![Screenshot (8)](https://user-images.githubusercontent.com/61820721/140601337-a907aff9-d33f-4a8a-bc06-969d4fe44852.png)
